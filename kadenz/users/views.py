@@ -8,7 +8,7 @@ def login_process(request):
     return HttpResponse("placeholder for processing login form data")
 
 def registration(request):
-    return HttpResponse("placeholder for displaying registration page")
+    return render(request, "registration.html")
 
 def registration_process(request):
     return HttpResponse("placeholder for processing registration form data")
