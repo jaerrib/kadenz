@@ -8,10 +8,10 @@ class Organization(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True)
-    organization_name = models.CharField(max_length=45)
+    name = models.CharField(max_length=45)
     details = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.organization_name
+        return self.name
