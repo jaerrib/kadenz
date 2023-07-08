@@ -13,8 +13,8 @@ def edit_event(request, event_id):
 def delete_event(request, event_id):
     return HttpResponse(f"placeholder to delete event number: {event_id}")
 
-def new_event(request, group_id):
-    return HttpResponse(f"placeholder for creating new event for group number; {group_id}")
+def new_event(request, organization_id):
+    return HttpResponse(f"placeholder for creating new event for group number; {organization_id}")
 
 def rsvp(request, event_id):
     return HttpResponse(f"placeholder to rsvp to event number {event_id}")
