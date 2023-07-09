@@ -17,7 +17,8 @@
         <hr>
 
         <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
-            <h2>Create an Organization</h2>
+            <h2>Create an Event</h2>
+            <h2>for {{organization.name}}</h2>
 
             <div>
                 {% if messages %}
@@ -32,10 +33,19 @@
             <div class="mb-3">
                 <form action="/organizations/new/process/" method="post">
                     {% csrf_token %}
-                    <label for="name" class="form_label mb-1">*Organization Name:</label>
+                    <input type="hidden" name="organization_id" value={{organization.id}}>
+                    <label for="name" class="form_label mb-1">*Event Name:</label>
                     <input type="text" name="name" class="form-control mb-3">
-                    <label for="details" class="form_label mb-1">Details:</label>
-                    <input type="textarea" name="details" class="form-control mb-3" style="height: 100px;" placeholder="Fill in some details about your organization">
+                    <label for="description" class="form_label mb-1">Description:</label>
+                    <input type="textarea" name="description" class="form-control mb-3" style="height: 100px;"
+                        placeholder="Fill in some details about your event">
+                    <label for="location" class="form_label mb-1">Location:</label>
+                    <input type="textarea" name="location" class="form-control mb-3" style="height: 100px;"
+                        placeholder="Provide the address of your event">
+                    <label for="start_date" class="form_label mb-1">*Start Date:</label>
+                    <input type="date" name="start_date" class="form-control mb-3">
+                    <label for="end_date" class="form_label mb-1">*End Date:</label>
+                    <input type="date" name="end_date" class="form-control mb-3">
                     <input type="submit" value="Submit" class="btn btn-primary">
                 </form>
             </div>

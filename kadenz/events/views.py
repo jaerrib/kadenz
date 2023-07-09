@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from . models import Event
+from organizations.models import Organization
 
 # Create your views here.
 def all_events(request):
@@ -31,7 +32,7 @@ def edit_event(request, event_id):
     }
     return render(request, "edit.html", context)
 
-def edit_event_process(request, event_id):
+def edit_event_process(request):
     errors = Event.ojects.basic_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
@@ -55,7 +56,9 @@ def delete_event(request, event_id):
     return redirect("/dashboard")
 
 def new_event(request, organization_id):
-    return HttpResponse(f"placeholder for creating new event for group number; {organization_id}")
+    organization = Organization.objects.get(id=organization_id)
+    context = {"organization": organization}
+    return render(request, "new-event.html", context)
 
 def rsvp(request, event_id):
     return HttpResponse(f"placeholder to rsvp to event number {event_id}")

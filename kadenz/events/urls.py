@@ -8,5 +8,6 @@ urlpatterns = [
     path('<int:event_id>/edit/prcocess', views.edit_event_process),
     path('<int:event_id>/delete/', views.delete_event),
     path('new/<int:organization_id>/', views.new_event),
+    # path('new/process', views.new_event_process),
     path('<int:event_id>/rsvp/', views.rsvp),
 ]
