@@ -38,9 +38,7 @@ def new_organization(request):
     return render(request, "new-organization.html")
 
 def new_organization_process(request):
-    print("USER ID", request.session['userid'])
     creator = User.objects.get(id=request.session["userid"])
-    print(creator)
     organization = Organization(
         name=request.POST["name"],
         details=request.POST["details"],
