@@ -13,19 +13,33 @@
     <div class="container">
         <h1 class="text-primary text-center">Kadenz</h1>
         <p class="text-secondary text-center">In tune with your fundraising needs!</p>
+
         <hr>
+
         <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
             <h2>Create an Organization</h2>
+
+            <div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
             <div class="mb-3">
                 <form action="/organizations/new/process/" method="post">
                     {% csrf_token %}
-                    <label for="name" class="form_label mb-1">Organization Name:</label>
+                    <label for="name" class="form_label mb-1">*Organization Name:</label>
                     <input type="text" name="name" class="form-control mb-3">
                     <label for="details" class="form_label mb-1">Details:</label>
                     <input type="textarea" name="details" class="form-control mb-3" style="height: 100px;" placeholder="Fill in some details about your organization">
                     <input type="submit" value="Submit" class="btn btn-primary">
                 </form>
             </div>
+            <p class="text-secondary fst-italic">*Required</p>
         </div>
     </div>
 

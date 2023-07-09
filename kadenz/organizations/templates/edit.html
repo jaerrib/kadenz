@@ -17,6 +17,17 @@
         <a href="/organizations/">Back to Organizations List</a>
         <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
             <h2>Edit {{organization.name}}</h2>
+
+            <div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
             <div class="mb-3">
                 <form action="/organizations/{{organization.id}}/edit/process/" method="post">
                     {% csrf_token %}
