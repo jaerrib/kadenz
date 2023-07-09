@@ -13,11 +13,12 @@ class OrganizationManager(models.Manager):
         return errors
 
 class Organization(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True)
+    creator = models.ForeignKey(User, related_name="organizations", on_delete = models.CASCADE)
+    # user = models.ForeignKey(
+    #     User,
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True)
     name = models.CharField(max_length=45)
     details = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

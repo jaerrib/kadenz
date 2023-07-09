@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, HttpResponse
 # from django.urls import reverse_lazy
 from .models import Organization
 from django.contrib import messages
+from users.models import User
 
 # Create your views here.
 # class AllOrganizations(ListView):
@@ -74,9 +75,11 @@ def new_organization(request):
     return render(request, "new-organization.html")
 
 def new_organization_process(request):
+    creator = User.objects.get(id=1) # will need to change to the logged in user
     organization = Organization(
         name=request.POST["name"],
-        details=request.POST["details"]
+        details=request.POST["details"],
+        creator=creator
     )
     errors = Organization.objects.basic_validator(request.POST)
     if len(errors) > 0:
@@ -84,10 +87,10 @@ def new_organization_process(request):
         for key, value in errors.items():
             messages.error(request, value)
         # redirect the user back to the form to fix the errors
-            return redirect(f'/organizations/new')
+            return redirect('/organizations/new')
         else:
             organization.save()
-            return redirect(f"/organizations/")
+            return redirect("/organizations/")
 
 def edit_organization_process(request, organization_id):
     # pass the post data to the method we wrote and save the response in a variable called errors
