@@ -8,12 +8,9 @@ class UserManager(models.Manager):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Invalid email address!"
-
-        user = User.objects.filter(email=postData['email']) # why are we using filter here instead of get?
-        if user: # note that we take advantage of truthiness here: an empty list will return false
+        user = User.objects.filter(email=postData['email'])
+        if user:
             errors['email'] = "Email already exists!"
-
-
         return errors
 
 class User(models.Model):
