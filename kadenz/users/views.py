@@ -34,8 +34,8 @@ def login_process(request):
             request.session['userid'] = logged_user.id
             print(request.session['userid'])
             # never render on a post, always redirect!
-            return render(request, 'dashboard.html')
-        # if we didn't find anything in the database by searching by username or if the passwords don't match, 
+            return redirect('/dashboard/')
+        # if we didn't find anything in the database by searching by username or if the passwords don't match,
         # redirect back to a safe route
         return redirect("/")
 
@@ -66,7 +66,7 @@ def registration_process(request):
 
 
 def dashboard(request):
-    user_organizations = Organization.objects.filter(creator=User.objects.get(id=2))
+    user_organizations = Organization.objects.filter(creator=User.objects.get(id=request.session["userid"]))
 
     context = {
     	"user_organizations": user_organizations

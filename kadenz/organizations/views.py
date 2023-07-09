@@ -75,11 +75,13 @@ def new_organization(request):
     return render(request, "new-organization.html")
 
 def new_organization_process(request):
-    creator = User.objects.get(id=1) # will need to change to the logged in user
+    print("USER ID", request.session['userid'])
+    creator = User.objects.get(id=request.session["userid"])
+    print(creator)
     organization = Organization(
         name=request.POST["name"],
         details=request.POST["details"],
-        creator=creator
+        creator=User.objects.get(id=request.session["userid"])
     )
     errors = Organization.objects.basic_validator(request.POST)
     if len(errors) > 0:
@@ -88,9 +90,9 @@ def new_organization_process(request):
             messages.error(request, value)
         # redirect the user back to the form to fix the errors
             return redirect('/organizations/new')
-        else:
-            organization.save()
-            return redirect("/organizations/")
+    else:
+        organization.save()
+        return redirect("/organizations/")
 
 def edit_organization_process(request, organization_id):
     # pass the post data to the method we wrote and save the response in a variable called errors

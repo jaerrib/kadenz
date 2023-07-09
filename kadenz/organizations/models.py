@@ -13,7 +13,7 @@ class OrganizationManager(models.Manager):
         return errors
 
 class Organization(models.Model):
-    creator = models.ForeignKey(User, related_name="organizations", on_delete = models.CASCADE)
+    creator = models.ForeignKey(User, related_name="organizations", on_delete=models.CASCADE)
     # user = models.ForeignKey(
     #     User,
     #     on_delete=models.CASCADE,
