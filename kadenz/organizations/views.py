@@ -1,37 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
-# from django.views.generic.list import ListView
-# from django.views.generic.detail import DetailView
-# from django.views.generic.edit import CreateView, UpdateView, DeleteView
-# from django.urls import reverse_lazy
 from .models import Organization
 from django.contrib import messages
 from users.models import User
-
-# Create your views here.
-# class AllOrganizations(ListView):
-#     model = Organization
-#     context_object_name = "all_organizations"
-
-# class OrganizationDetail(DetailView):
-#     model = Organization
-#     context_object_name = "organization"
-#     template_name = "organizations/organization.html"
-
-# class OrganizationCreate(CreateView):
-#     model = Organization
-#     fields = '__all__'
-#     success_url = reverse_lazy('all_organizations')
-
-# class OrganizationEdit(UpdateView):
-#     model = Organization
-#     fields = '__all__'
-#     success_url = reverse_lazy('all_organizations')
-
-# class OrganizationDelete(DeleteView):
-#     model = Organization
-#     context_object_name = "organization"
-#     success_url = reverse_lazy('all_organizations')
-
 
 def all_organizations(request):
     context = {
@@ -58,13 +28,6 @@ def edit_organization(request, organization_id):
     }
     return render(request, "edit.html", context)
 
-
-# def edit_organization_process(request, organization_id):
-#     organization = Organization.objects.get(id=organization_id)
-#     organization.name = request.POST["name"]
-#     organization.details = request.POST["details"]
-#     organization.save()
-#     return redirect(f"/{organization.id}/")
 
 def delete_organization(request, organization_id):
     organization = Organization.objects.get(id=organization_id)
