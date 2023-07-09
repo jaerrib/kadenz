@@ -47,7 +47,12 @@ def registration_process(request):
 
 
 def dashboard(request):
-    user_organizations = Organization.objects.filter(creator=User.objects.get(id=request.session["userid"]))
-
-    context = {"user_organizations": user_organizations}
-    return render(request, "dashboard.html", context)
+    if "userid" not in request.session:
+        return redirect("/")
+    else:
+        user_organizations = Organization.objects.filter(creator=User.objects.get(id=request.session["userid"]))
+        context = {
+            "user_organizations": user_organizations,
+            "user": user_organizations[0].creator,
+            }
+        return render(request, "dashboard.html", context)
