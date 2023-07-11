@@ -50,9 +50,10 @@ def dashboard(request):
     if "userid" not in request.session:
         return redirect("/")
     else:
-        user_organizations = Organization.objects.filter(creator=User.objects.get(id=request.session["userid"]))
+        user=User.objects.get(id=request.session["userid"])
+        user_organizations = Organization.objects.filter(creator=user)
         context = {
             "user_organizations": user_organizations,
-            "user": user_organizations[0].creator,
+            "user": user
             }
         return render(request, "dashboard.html", context)
