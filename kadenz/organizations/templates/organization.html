@@ -8,10 +8,11 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>One Organization</title>
 </head>
-<table>
+<body>
     {{organization.id}}<br>
     {{organization.name}}<br>
-    {{organization.details}}
+    {{organization.details}}<br>
+    <a href="/events/new/{{organization.id}}/">Add an Event</a>
     </body>
 
 </html>
