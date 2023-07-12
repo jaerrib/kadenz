@@ -17,31 +17,39 @@
         <hr>
 
         <h2 class="text-center mb-3">Welcome, {{user.first_name}}!</h2>
-        <a href="/logout/">Logout</a> |  <a href="/organizations/new/">Create an Organization</a>
+        <a href="/logout/">Logout</a> | <a href="/organizations/new/">Create an Organization</a>
 
         <h1>My Organizations</h1>
 
-            <table class="table">
-                <thead>
+        <table class="table">
+            <thead>
                 <tr>
                     <th>Name</th>
                     <th>Details</th>
                     <th>Actions</th>
                 </tr>
-                </thead>
-                <tbody>
-                    {% for organization in user_organizations %}
-                    <tr>
-                        <td><a href="/organizations/{{organization.id}}/">{{organization.name}}</a></td>
-                        <td>{{organization.details}}</td>
-                        <td><a href="/organizations/{{organization.id}}/edit/">Edit</a> | <a href="/organizations/{{organization.id}}/delete/">Delete</a> | <a href="/events/new/{{organization.id}}/">Add an Event</a></td>
-                    </tr>
-                    {% empty %}
+            </thead>
+            <tbody>
+                {% for organization in user_organizations %}
+                <tr>
+                    <td><a href="/organizations/{{organization.id}}/">{{organization.name}}</a></td>
+                    <td>{{organization.details}}</td>
+                    <td><a href="/organizations/{{organization.id}}/edit/">Edit</a> | <a
+                            href="/organizations/{{organization.id}}/delete/">Delete</a> | <a
+                            href="/events/new/{{organization.id}}/">Add an Event</a></td>
+                </tr>
+                {% empty %}
                 <h3>No items in list</h3>
-                    {% endfor %}
-                </tbody>
-            </table>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+
+    <footer>
+        <div class="d-flex flex-column flex-sm-row justify-content-center py-4 my-4 border-top">
+            <p>&copy; 2023 Kadenz Fundraising.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
