@@ -17,16 +17,17 @@
         <hr>
 
         <h2 class="text-center mb-3">Welcome, {{user.first_name}}!</h2>
-        <a href="/logout/">Logout</a>
+        <a href="/logout/">Logout</a> |  <a href="/organizations/new/">Create an Organization</a>
 
-        <table>
-            <h1>My Organizations</h1>
-            <a href="/organizations/new/">Create an Organization</a>
+        <h1>My Organizations</h1>
+
             <table class="table">
                 <thead>
+                <tr>
                     <th>Name</th>
                     <th>Details</th>
                     <th>Actions</th>
+                </tr>
                 </thead>
                 <tbody>
                     {% for organization in user_organizations %}
