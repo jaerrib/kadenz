@@ -35,17 +35,20 @@
                     {% csrf_token %}
                     <input type="hidden" name="organization_id" value={{organization.id}}>
                     <label for="name" class="form_label mb-1">*Event Name:</label>
-                    <input type="text" name="name" class="form-control mb-3" value="{{event.name}}">
+                    <input type="text" name="name" class="form-control mb-3" value="{{event.name}}" id="name">
                     <label for="description" class="form_label mb-1">Description:</label>
                     <input type="textarea" name="description" class="form-control mb-3" style="height: 100px;"
-                        placeholder="Fill in some details about your event" value="{{event.description}}">
+                        placeholder="Fill in some details about your event" value="{{event.description}}"
+                        id="description">
                     <label for="location" class="form_label mb-1">Location:</label>
                     <input type="textarea" name="location" class="form-control mb-3" style="height: 100px;"
-                    value="{{event.location}}">
+                        value="{{event.location}}" id="location">
                     <label for="start_date" class="form_label mb-1">*Start Date:</label>
-                    <input type="date" name="start_date" class="form-control mb-3" value="{{event.start_date}}">
+                    <input type="date" name="start_date" class="form-control mb-3" value="{{event.start_date}}"
+                        id="start_date">
                     <label for="end_date" class="form_label mb-1">*End Date:</label>
-                    <input type="date" name="end_date" class="form-control mb-3" value="{{event.end_date}}">
+                    <input type="date" name="end_date" class="form-control mb-3" value="{{event.end_date}}"
+                        id="end_date">
                     <input type="submit" value="Submit" class="btn btn-primary">
                 </form>
             </div>

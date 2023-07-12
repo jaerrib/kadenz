@@ -35,17 +35,17 @@
                     {% csrf_token %}
                     <input type="hidden" name="organization_id" value={{organization.id}}>
                     <label for="name" class="form_label mb-1">*Event Name:</label>
-                    <input type="text" name="name" class="form-control mb-3">
+                    <input type="text" name="name" class="form-control mb-3" id="name">
                     <label for="description" class="form_label mb-1">Description:</label>
                     <input type="textarea" name="description" class="form-control mb-3" style="height: 100px;"
-                        placeholder="Fill in some details about your event">
+                        placeholder="Fill in some details about your event" id="description">
                     <label for="location" class="form_label mb-1">Location:</label>
                     <input type="textarea" name="location" class="form-control mb-3" style="height: 100px;"
-                        placeholder="Provide the address of your event">
+                        placeholder="Provide the address of your event" id="location">
                     <label for="start_date" class="form_label mb-1">*Start Date:</label>
-                    <input type="date" name="start_date" class="form-control mb-3">
+                    <input type="date" name="start_date" class="form-control mb-3" id="start_date">
                     <label for="end_date" class="form_label mb-1">*End Date:</label>
-                    <input type="date" name="end_date" class="form-control mb-3">
+                    <input type="date" name="end_date" class="form-control mb-3" id="end_date">
                     <input type="submit" value="Submit" class="btn btn-primary">
                 </form>
             </div>

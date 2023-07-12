@@ -32,9 +32,10 @@
                 <form action="/organizations/{{organization.id}}/edit/process/" method="post">
                     {% csrf_token %}
                     <label for="name" class="form_label mb-1">Organization Name:</label>
-                    <input type="text" name="name" class="form-control mb-3" value="{{organization.name}}">
+                    <input type="text" name="name" class="form-control mb-3" value="{{organization.name}}" id="name">
                     <label for="details" class="form_label mb-1">Details:</label>
-                    <input type="textarea" name="details" class="form-control mb-3" value="{{organization.details}}">
+                    <input type="textarea" name="details" class="form-control mb-3" value="{{organization.details}}"
+                        id="details">
                     <input type="submit" value="Submit" class="btn btn-primary">
                 </form>
             </div>
