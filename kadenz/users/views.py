@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from .models import User
 from organizations.models import Organization
 from django.contrib import messages
@@ -9,16 +9,16 @@ import bcrypt
 def index(request):
     return render(request, "index.html")
 
+
 def login_process(request):
     user = User.objects.filter(email=request.POST['email'])
     if user:
         logged_user = user[0]
-    if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
-        request.session['userid'] = logged_user.id
-        print(request.session['userid'])
-        return redirect('/dashboard/')
-    else:
-        return redirect("/")
+        if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
+            request.session['userid'] = logged_user.id
+            return redirect('/dashboard/')
+    return redirect("/")
+
 
 def logout(request):
     request.session.clear()
@@ -27,6 +27,7 @@ def logout(request):
 
 def registration(request):
     return render(request, "registration.html")
+
 
 def registration_process(request):
     errors = User.objects.basic_validator(request.POST)
@@ -50,7 +51,7 @@ def dashboard(request):
     if "userid" not in request.session:
         return redirect("/")
     else:
-        user=User.objects.get(id=request.session["userid"])
+        user = User.objects.get(id=request.session["userid"])
         user_organizations = Organization.objects.filter(creator=user)
         context = {
             "user_organizations": user_organizations,
