@@ -5,10 +5,16 @@ from organizations.models import Organization
 class EventManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
-        # if len(postData["name"]) < 5:
-        #     errors["name"] = "Organization name should be at least 5 characters"
-        # if len(postData["details"]) < 10:
-        #     errors["details"] = "Details should be at least 10 characters"
+        if len(postData["name"]) < 5:
+            errors["name"] = "Event name should be at least 5 characters"
+        if len(postData["description"]) < 10:
+            errors["description"] = "Description should be at least 10 characters"
+        if postData["location"] == "":
+            errors["location"] = "Location is required"
+        if postData["start_date"] == "":
+            errors["start_date"] = "Start date is required"
+        if postData["end_date"] == "":
+            errors["end_date"] = "End date is required"
         return errors
 
 class Event(models.Model):

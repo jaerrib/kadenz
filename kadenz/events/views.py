@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from . models import Event
 from organizations.models import Organization
-from datetime import date
+from django.contrib import messages
 
 # Create your views here.
 def all_events(request):
@@ -20,12 +20,6 @@ def view_event(request, event_id):
 
 def edit_event(request, event_id):
     event = Event.objects.get(id=event_id)
-
-    # string_input_with_date = str(event.start_date)
-    # print(string_input_with_date)
-    # start_date = (string_input_with_date, "%M/%d/%Y")
-
-
     context = {
         "event": {
             "id": event.id,
@@ -47,7 +41,8 @@ def new_event_process(request):
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-            return redirect('/organizations/new')
+        organization_id = request.POST["organization_id"]
+        return redirect(f'/events/new/{organization_id}')
     else:
         event = Event(
             name=request.POST["name"],
@@ -62,13 +57,13 @@ def new_event_process(request):
 
 
 def edit_event_process(request):
-    errors = Event.ojects.basic_validator(request.POST)
+    errors = Event.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect(f'/events/{event.event_id}/edit')
+        event_id = request.POST["event_id"]
+        return redirect(f'/events/{event_id}/edit')
     else:
-        # event = Event.objects.get(id=event_id)
         event.name = request.POST["name"]
         event.description = request.POST["description"]
         event.location = request.POST["location"]
