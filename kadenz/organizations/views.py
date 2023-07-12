@@ -51,7 +51,7 @@ def new_organization_process(request):
             return redirect('/organizations/new')
     else:
         organization.save()
-        return redirect("/organizations/")
+        return redirect("/dashboard/")
 
 def edit_organization_process(request, organization_id):
     errors = Organization.objects.basic_validator(request.POST)
