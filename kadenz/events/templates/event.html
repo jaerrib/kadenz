@@ -11,8 +11,10 @@
 <body>
     {{event.id}}<br>
     {{event.name}}<br>
-    {{event.description}}
-    <a href="/events/{{event.id}}/rsvp/">RSVP</a>
+    {{event.description}}<br>
+    Organization: {{event.organization}}<br>
+    <a href="/events/{{event.id}}/rsvp/">Click to RSVP</a>
+    <p>Number of users to RSVP: {{event.users.count}}</p>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from . models import Event
+from .models import Event
 from organizations.models import Organization
 from users.models import User
 from django.contrib import messages
@@ -16,6 +16,7 @@ def view_event(request, event_id):
     context = {
     	"event": Event.objects.get(id=event_id)
     }
+
     return render(request, "event.html", context)
 
 
