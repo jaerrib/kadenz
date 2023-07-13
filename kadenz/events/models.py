@@ -1,5 +1,6 @@
 from django.db import models
 from organizations.models import Organization
+from users.models import User
 
 # Create your models here.
 class EventManager(models.Manager):
@@ -26,6 +27,7 @@ class Event(models.Model):
     end_date = models.DateField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    users = models.ManyToManyField(User)
     objects = EventManager()
 
     def __str__(self):

@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from . models import Event
 from organizations.models import Organization
+from users.models import User
 from django.contrib import messages
 
 # Create your views here.
@@ -87,4 +88,8 @@ def new_event(request, organization_id):
 
 
 def rsvp(request, event_id):
-    return HttpResponse(f"placeholder to rsvp to event number {event_id}")
+    # Add logic to make sure user is logged in here
+    event = Event.objects.get(id=event_id)
+    user = User.objects.get(id=request.session["userid"])
+    event.users.add(user)
+    return redirect(f"/events/{event.id}/")
