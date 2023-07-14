@@ -1,8 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect
+import os, requests
 from .models import Event
 from organizations.models import Organization
 from users.models import User
 from django.contrib import messages
+
 
 # Create your views here.
 def all_events(request):
@@ -13,8 +15,9 @@ def all_events(request):
 
 
 def view_event(request, event_id):
+    event = Event.objects.get(id=event_id)
     context = {
-    	"event": Event.objects.get(id=event_id)
+    	"event": event,
     }
 
     return render(request, "event.html", context)
@@ -28,7 +31,9 @@ def edit_event(request, event_id):
             "organization": event.organization,
             "name": event.name,
             "description": event.description,
-            "location": event.location,
+            "street": event.street,
+            "city": event.city,
+            "state": event.state,
             "start_date": event.start_date,
             "end_date": event.end_date,
             "created_at": event.created_at,
@@ -49,11 +54,20 @@ def new_event_process(request):
         event = Event(
             name=request.POST["name"],
             description=request.POST["description"],
-            location=request.POST["location"],
+            street=request.POST["street"],
+            city=request.POST["city"],
+            state=request.POST["state"],
             start_date=request.POST["start_date"],
             end_date=request.POST["end_date"],
             organization=Organization.objects.get(id=request.POST['organization_id'])
         )
+        event.save()
+        lookup = f"{event.street} {event.city} {event.state}"
+        headers = os.environ.get("KEY")
+        response = requests.get(f"https://api.tomtom.com/search/2/geocode/{lookup}.json?storeResult=false&view=Unified&key={headers}")
+        lon = response.json()['results'][0]['position']['lon']
+        lat = response.json()['results'][0]['position']['lat']
+        event.location = f"https://api.tomtom.com/map/1/staticimage?key={headers}&zoom=15&center={lon},{lat}&format=jpg&layer=basic&style=main&width=400&height=400&view=Unified&language=en-GB"
         event.save()
         return redirect("/organizations/")
 
