@@ -67,9 +67,9 @@ def new_event_process(request):
         response = requests.get(f"https://api.tomtom.com/search/2/geocode/{lookup}.json?storeResult=false&view=Unified&key={headers}")
         lon = response.json()['results'][0]['position']['lon']
         lat = response.json()['results'][0]['position']['lat']
-        event.location = f"https://api.tomtom.com/map/1/staticimage?key={headers}&zoom=15&center={lon},{lat}&format=jpg&layer=basic&style=main&width=400&height=400&view=Unified&language=en-GB"
+        event.location = f"https://api.tomtom.com/map/1/staticimage?key={headers}&zoom=15&center={lon},{lat}&format=png&layer=basic&style=main&width=512&height=512&view=Unified&language=en-US"
         event.save()
-        return redirect("/organizations/")
+        return redirect(f"events/{event.id}/")
 
 
 def edit_event_process(request):
@@ -80,14 +80,24 @@ def edit_event_process(request):
         event_id = request.POST["event_id"]
         return redirect(f'/events/{event_id}/edit')
     else:
+        event = Event.objects.get(id=request.POST["event_id"])
         event.name = request.POST["name"]
         event.description = request.POST["description"]
-        event.location = request.POST["location"]
+        event.street = request.POST["street"]
+        event.city = request.POST["city"]
+        event.state = request.POST["state"]
         event.start_date = request.POST["start_date"]
         event.end_date = request.POST["end_date"]
         event.save()
+        lookup = f"{event.street} {event.city} {event.state}"
+        headers = os.environ.get("KEY")
+        response = requests.get(f"https://api.tomtom.com/search/2/geocode/{lookup}.json?storeResult=false&view=Unified&key={headers}")
+        lon = response.json()['results'][0]['position']['lon']
+        lat = response.json()['results'][0]['position']['lat']
+        event.location = f"https://api.tomtom.com/map/1/staticimage?key={headers}&zoom=15&center={lon},{lat}&format=png&layer=basic&style=main&width=512&height=512&view=Unified&language=en-US"
+        event.save()
         messages.success(request, "Event successfully updated")
-        return redirect(f"/{event.id}/")
+        return redirect(f"/events/{event.id}/")
 
 
 def delete_event(request, event_id):
