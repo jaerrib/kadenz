@@ -29,13 +29,19 @@
                 <td>{{event.start_date}}</td>
                 <td>{{event.end_date}}</td>
                 <td>{{event.organization.name}}</td>
-                <td><a href="/events/{{event.id}}/edit/">Edit</a> | <a href="/events/{{event.id}}/delete/">Delete</a></td>
+                <td><a href="/events/{{event.id}}/edit/">Edit</a> | <a href="/events/{{event.id}}/delete/">Delete</a>
+                </td>
             </tr>
             {% empty %}
-        <h3>No items in list</h3>
+            <h3>No items in list</h3>
             {% endfor %}
         </tbody>
     </table>
+
+    {% block footer %}
+    {% include "footer.html" %}
+    {% endblock footer %}
+
     </body>
 
 </html>

@@ -20,6 +20,11 @@
   <a href="/events/{{event.id}}/rsvp/">Click to RSVP</a>
   <p>Number of users to RSVP: {{event.users.count}}</p>
   <img src="{{event.location}}" alt="map" width="400" height="400">
+
+  {% block footer %}
+  {% include "footer.html" %}
+  {% endblock footer %}
+
 </body>
 
 
