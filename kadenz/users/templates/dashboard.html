@@ -10,37 +10,48 @@
 </head>
 
 <body>
+
+    {% block header %}
+    {% include "header.html" %}
+    {% endblock header %}
+
     <div class="container">
-        <h1 class="text-primary text-center">Kadenz</h1>
-        <p class="text-secondary text-center">In tune with your fundraising needs!</p>
+        <h2 class="my-4">Welcome, {{user.first_name}}!</h2>
 
-        <hr>
+        <h3>My Organizations</h3>
 
-        <h2 class="text-center mb-3">Welcome, {{user.first_name}}!</h2>
-        <a href="/logout/">Logout</a> | <a href="/organizations/new/">Create an Organization</a>
+        <!-- {% load static %}
+        <img src="{% static 'kadenz-icon.png' %}"> -->
 
-        <h1>My Organizations</h1>
-
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Details</th>
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 {% for organization in user_organizations %}
                 <tr>
-                    <td><a href="/organizations/{{organization.id}}/">{{organization.name}}</a></td>
-                    <td>{{organization.details}}</td>
-                    <td><a href="/organizations/{{organization.id}}/edit/">Edit</a> | <a
-                            href="/organizations/{{organization.id}}/delete/">Delete</a> | <a
-                            href="/events/new/{{organization.id}}/">Add an Event</a></td>
+                    <td>
+                        <h5 class="my-2">{{organization.name}}</h5>
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+
+                        <a href="/organizations/{{organization.id}}/" class="btn btn-outline-primary mx-auto my-2">View</a>
+                        <a href="/organizations/{{organization.id}}/edit/" class="btn btn-outline-primary mx-auto my-2">Edit</a>
+                        <a href="/organizations/{{organization.id}}/delete/" class="btn btn-outline-primary mx-auto my-2">Delete</a>
+                    </div>
+                        <a href="/events/new/{{organization.id}}/" class="btn btn-primary mx-auto my-2">Add an Event</a>
+                    </td>
                 </tr>
                 {% empty %}
-                <h3>No items in list</h3>
-                {% endfor %}
+                <tr>
+
+                    <h3>No items in list</h3>
+                    {% endfor %}
+                </tr>
             </tbody>
         </table>
     </div>

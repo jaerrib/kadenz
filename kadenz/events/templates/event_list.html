@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -8,40 +8,51 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>All Events</title>
 </head>
-<table>
-    <h1>All Events</h1>
-    <table class="table">
-        <thead>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Location</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Organization</th>
-            <th>Actions</th>
-        </thead>
-        <tbody>
-            {% for event in all_events %}
-            <tr>
-                <td><a href="/events/{{event.id}}/">{{event.name}}</a></td>
-                <td>{{event.description}}</td>
-                <td>{{event.street}} {{event.city}}, {{event.state}}</td>
-                <td>{{event.start_date}}</td>
-                <td>{{event.end_date}}</td>
-                <td>{{event.organization.name}}</td>
-                <td><a href="/events/{{event.id}}/edit/">Edit</a> | <a href="/events/{{event.id}}/delete/">Delete</a>
-                </td>
-            </tr>
-            {% empty %}
-            <h3>No items in list</h3>
-            {% endfor %}
-        </tbody>
-    </table>
+
+<body>
+
+    {% block header %}
+    {% include "header.html" %}
+    {% endblock header %}
+
+    <div class="container">
+
+        <table>
+            <h1>All Events</h1>
+            <table class="table">
+                <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Organization</th>
+                    <thead>Actions</th>
+                    </thead>
+                <tbody>
+                    {% for event in all_events %}
+                    <tr>
+                        <td><a href="/events/{{event.id}}/">{{event.name}}</a></td>
+                        <td>{{event.description}}</td>
+                        <td>{{event.street}} {{event.city}}, {{event.state}}</td>
+                        <td>{{event.start_date}}</td>
+                        <td>{{event.end_date}}</td>
+                        <td>{{event.organization.name}}</td>
+                        <td><a href="/events/{{event.id}}/edit/">Edit</a> | <a
+                                href="/events/{{event.id}}/delete/">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <h3>No items in list</h3>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
 
     {% block footer %}
     {% include "footer.html" %}
     {% endblock footer %}
 
-    </body>
+</body>
 
 </html>

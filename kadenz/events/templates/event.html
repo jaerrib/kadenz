@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <title>One Event</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>One Event</title>
 </head>
 
 <body>
-  {{event.id}}<br>
-  {{event.name}}<br>
-  {{event.description}}<br>
-  {{event.street}}, {{event.city}}, {{event.state}}<br>
-  {{event.start_date}}<br>
-  {{event.end_date}}<br>
-  Organization: {{event.organization}}<br>
-  <a href="/events/{{event.id}}/rsvp/">Click to RSVP</a>
-  <p>Number of users to RSVP: {{event.users.count}}</p>
-  <img src="{{event.location}}" alt="map" width="400" height="400">
 
-  {% block footer %}
-  {% include "footer.html" %}
-  {% endblock footer %}
+    {% block header %}
+    {% include "header.html" %}
+    {% endblock header %}
+
+    <div class="container">
+
+        {{event.id}}<br>
+        {{event.name}}<br>
+        {{event.description}}<br>
+        {{event.street}}, {{event.city}}, {{event.state}}<br>
+        {{event.start_date}}<br>
+        {{event.end_date}}<br>
+        Organization: {{event.organization}}<br>
+        <a href="/events/{{event.id}}/rsvp/">Click to RSVP</a>
+        <p>Number of users to RSVP: {{event.users.count}}</p>
+        <img src="{{event.location}}" alt="map" width="400" height="400">
+    </div>
+
+    {% block footer %}
+    {% include "footer.html" %}
+    {% endblock footer %}
 
 </body>
 

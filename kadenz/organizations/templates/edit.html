@@ -10,10 +10,11 @@
 </head>
 
 <body>
+    {% block header %}
+    {% include "header.html" %}
+    {% endblock header %}
+
     <div class="container">
-        <h1 class="text-primary text-center">Kadenz</h1>
-        <p class="text-secondary text-center">In tune with your fundraising needs!</p>
-        <hr>
         <a href="/organizations/">Back to Organizations List</a>
         <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
             <h2>Edit {{organization.name}}</h2>

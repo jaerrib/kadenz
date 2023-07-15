@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -8,11 +8,19 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>One Organization</title>
 </head>
+
 <body>
-    {{organization.id}}<br>
-    {{organization.name}}<br>
-    {{organization.details}}<br>
-    <a href="/events/new/{{organization.id}}/">Add an Event</a>
+
+    {% block header %}
+    {% include "header.html" %}
+    {% endblock header %}
+
+    <div class="container">
+        {{organization.id}}<br>
+        {{organization.name}}<br>
+        {{organization.details}}<br>
+        <a href="/events/new/{{organization.id}}/">Add an Event</a>
+    </div>
 
     {% block footer %}
     {% include "footer.html" %}

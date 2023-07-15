@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="text-primary text-center">Kadenz</h1>
-        <p class="text-secondary text-center">In tune with your fundraising needs!</p>
+    {% block header %}
+    {% include "header.html" %}
+    {% endblock header %}
 
-        <hr>
+    <div class="container">
 
         <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
             <h2>Create an Event</h2>
