@@ -11,8 +11,10 @@
 
 <body>
     <div class="container">
-        <h1 class="text-primary text-center">Kadenz</h1>
-        <p class="text-secondary text-center">In tune with your fundraising needs!</p>
+        <div class="d-flex align-items-center justify-content-center">
+            {% load static %}
+            <a href="/"><img src="{% static 'kadenz-logo.png' %}" width="400" height="120" role="img"></a>
+        </div>
         <hr>
         <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
             <h2>Sign up for free</h2>
