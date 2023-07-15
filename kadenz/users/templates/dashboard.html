@@ -18,11 +18,7 @@
     <div class="container">
         <h2 class="my-4">Welcome, {{user.first_name}}!</h2>
 
-        <h3>My Organizations</h3>
-
-        <!-- {% load static %}
-        <img src="{% static 'kadenz-icon.png' %}"> -->
-
+        <h4>My Organizations</h4>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -38,22 +34,24 @@
                     </td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-
-                        <a href="/organizations/{{organization.id}}/" class="btn btn-outline-primary mx-auto my-2">View</a>
-                        <a href="/organizations/{{organization.id}}/edit/" class="btn btn-outline-primary mx-auto my-2">Edit</a>
-                        <a href="/organizations/{{organization.id}}/delete/" class="btn btn-outline-primary mx-auto my-2">Delete</a>
-                    </div>
+                            <a href="/organizations/{{organization.id}}/"
+                            class="btn btn-outline-info mx-auto my-2">View</a>
+                            <a href="/organizations/{{organization.id}}/edit/"
+                                class="btn btn-outline-info mx-auto my-2">Edit</a>
+                            <a href="/organizations/{{organization.id}}/delete/"
+                                class="btn btn-outline-info mx-auto my-2">Delete</a>
+                        </div>
                         <a href="/events/new/{{organization.id}}/" class="btn btn-primary mx-auto my-2">Add an Event</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-
                     <h3>No items in list</h3>
                     {% endfor %}
                 </tr>
             </tbody>
         </table>
+        <a href="/organizations/new/" class="btn btn-outline-info">Create a New Organization</a>
     </div>
 
     {% block footer %}
