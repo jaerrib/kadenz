@@ -5,12 +5,36 @@ import re
 class UserManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
+        for key in postData:
+            is_blank = False
+            if postData[key] == "":
+                is_blank = True
+        if is_blank:
+            errors['fields'] = "All fields required!"
+        if postData['password'] != postData['confirm_password']:
+            errors['password'] = "Passwords do not match!"
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Invalid email address!"
         user = User.objects.filter(email=postData['email'])
         if user:
             errors['email'] = "Email already exists!"
+        return errors
+
+    def login_validator(self, postData):
+        errors = {}
+        for key in postData:
+            is_blank = False
+            if postData[key] == "":
+                is_blank = True
+        if is_blank:
+            errors["fields"] = "All fields required!"
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData["email"]):
+            errors["email"] = "Invalid email address!"
+        user = User.objects.filter(email=postData["email"])
+        if not user:
+            errors["email"] = "User email does not exist - please sign up instead."
         return errors
 
 class User(models.Model):
