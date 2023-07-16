@@ -69,7 +69,7 @@ def new_event_process(request):
         lat = response.json()['results'][0]['position']['lat']
         event.location = f"https://api.tomtom.com/map/1/staticimage?key={headers}&zoom=15&center={lon},{lat}&format=png&layer=basic&style=main&width=512&height=512&view=Unified&language=en-US"
         event.save()
-        return redirect(f"events/{event.id}/")
+        return redirect(f"/events/{event.id}/")
 
 
 def edit_event_process(request):
