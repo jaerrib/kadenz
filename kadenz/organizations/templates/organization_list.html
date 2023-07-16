@@ -13,41 +13,38 @@
     {% block header %}
     {% include "header.html" %}
     {% endblock header %}
-    
+
     <h2 class="mb-3 text-center">All Organizations</h2>
     <div class="container">
-        <main class="container">
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
 
-                {% for organization in all_organizations %}
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h1 class="my-0 fw-normal">{{organization.name}}</h1>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title pricing-card-title">{{organization.details}}</h4>
+            {% for organization in all_organizations %}
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h1 class="my-0 fw-normal">{{organization.name}}</h1>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title pricing-card-title">{{organization.details}}</h4>
 
-                            {% if organization.creator.id == userid %}
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li><a href="/organizations/{{organization.id}}/edit/">Edit</a></li>
-                                <li><a href="/organizations/{{organization.id}}/delete/">Delete</a></li>
-                                <li><a href="/events/new/{{organization.id}}/">Add an Event</a></li>
-                            </ul>
-                            {% endif %}
+                        {% if organization.creator.id == userid %}
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li><a href="/organizations/{{organization.id}}/edit/">Edit</a></li>
+                            <li><a href="/organizations/{{organization.id}}/delete/">Delete</a></li>
+                            <li><a href="/events/new/{{organization.id}}/">Add an Event</a></li>
+                        </ul>
+                        {% endif %}
 
-                            <a href="/organizations/{{organization.id}}/"
-                                class="w-100 btn btn-lg btn-primary">Details</a>
-                        </div>
+                        <a href="/organizations/{{organization.id}}/" class="w-100 btn btn-lg btn-primary">Details</a>
                     </div>
                 </div>
-                {% empty %}
-                <h3>No items in list</h3>
-                {% endfor %}
             </div>
-        </main>
-
+            {% empty %}
+            <h3>No items in list</h3>
+            {% endfor %}
+        </div>
     </div>
+
     {% block footer %}
     {% include "footer.html" %}
     {% endblock footer %}
