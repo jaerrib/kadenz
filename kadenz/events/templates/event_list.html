@@ -17,36 +17,20 @@
 
     <div class="container">
 
-        <table>
-            <h1>All Events</h1>
-            <table class="table">
-                <thead>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Location</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Organization</th>
-                    <thead>Actions</th>
-                    </thead>
-                <tbody>
-                    {% for event in all_events %}
-                    <tr>
-                        <td><a href="/events/{{event.id}}/">{{event.name}}</a></td>
-                        <td>{{event.description}}</td>
-                        <td>{{event.street}} {{event.city}}, {{event.state}}</td>
-                        <td>{{event.start_date}}</td>
-                        <td>{{event.end_date}}</td>
-                        <td>{{event.organization.name}}</td>
-                        <td><a href="/events/{{event.id}}/edit/">Edit</a> | <a
-                                href="/events/{{event.id}}/delete/">Delete</a>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <h3>No items in list</h3>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <h2 class="mb-3 text-center">All Events</h2>
+
+        <div class="row row-cols-1 row-cols-md-3 mb-3">
+
+            {% for event in all_events %}
+            <div class="col">
+                {% block event-card %}
+                {% include "event-card.html" %}
+                {% endblock event-card %}
+            </div>
+            {% endfor %}
+
+        </div>
+
     </div>
 
     {% block footer %}

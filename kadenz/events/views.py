@@ -9,7 +9,7 @@ from django.contrib import messages
 # Create your views here.
 def all_events(request):
     context = {
-    	"all_events": Event.objects.all()
+    	"all_events": Event.objects.all().order_by('-start_date') #sort start date first
     }
     return render(request, "event_list.html", context)
 
@@ -103,7 +103,7 @@ def edit_event_process(request):
 def delete_event(request, event_id):
     event = Event.objects.get(id=event_id)
     event.delete()
-    return redirect("/dashboard")
+    return redirect("/dashboard/")
 
 
 def new_event(request, organization_id):
