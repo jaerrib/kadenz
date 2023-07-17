@@ -27,6 +27,8 @@
                 {% include "event-card.html" %}
                 {% endblock event-card %}
             </div>
+            {% empty %}
+            <h3>No events in list</h3>
             {% endfor %}
 
         </div>

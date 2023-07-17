@@ -21,11 +21,11 @@
                 </svg>
             </div>
             <div>
-                <h3 class="fs-2 text-body-emphasis">{{event.organization.name}} {{event.name}}</h3>
-                <!-- <h5>{{event.organization.name}}</h5> -->
+                <h3 class="fs-2 text-body-emphasis">{{event.name}}</h3>
+                <h4>{{event.organization.name}}</h4>
+                <h5>({{event.city}}, {{event.state}})</h5>
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>Starts: {{event.start_date}}</li>
-                    <li>Ends: {{event.end_date}}</li>
+                    <li>{{event.start_date}} - {{event.end_date}}</li>
                 </ul>
                 <a href="/events/{{event.id}}/" class="btn btn-primary">
                     Event Details
