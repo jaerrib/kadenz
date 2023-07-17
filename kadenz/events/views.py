@@ -118,3 +118,10 @@ def rsvp(request, event_id):
     user = User.objects.get(id=request.session["userid"])
     event.users.add(user)
     return redirect(f"/events/{event.id}/")
+
+def rsvp_cancel(request, event_id):
+    # Add logic to make sure user is logged in here
+    event = Event.objects.get(id=event_id)
+    user = User.objects.get(id=request.session["userid"])
+    event.users.remove(user)
+    return redirect(f"/events/{event.id}/")

@@ -15,18 +15,37 @@
     {% include "header.html" %}
     {% endblock header %}
 
-    <div class="container">
+    <div class="container border mb-4 rounded-3 shadow-sm p-3">
 
-        {{event.id}}<br>
-        {{event.name}}<br>
-        {{event.description}}<br>
-        {{event.street}}, {{event.city}}, {{event.state}}<br>
-        {{event.start_date}}<br>
-        {{event.end_date}}<br>
-        Organization: {{event.organization}}<br>
-        <a href="/events/{{event.id}}/rsvp/">Click to RSVP</a>
-        <p>Number of users to RSVP: {{event.users.count}}</p>
-        <img src="{{event.location}}" alt="map" width="400" height="400">
+        <div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 d-flex">
+
+            <div class="col">
+                <h1>{{event.name}}</h1>
+                <h2>Benefits <a href="/organizations/{{event.organization.id}}">{{event.organization}}</a></h2>
+                <hr>
+                <h4>{{event.start_date}} - {{event.end_date}}</h4>
+                <p>{{event.street}}, {{event.city}}, {{event.state}}</p>
+                <p>{{event.description}}</p>
+                <h5>{{event.users.count}} attending</h5>
+
+                <a href="/events/{{event.id}}/rsvp/" class="btn btn-primary">Click to RSVP</a>
+                <a href="/events/{{event.id}}/rsvp/cancel/" class="btn btn-primary">Cancel RSVP</a>
+            </div>
+
+            <div class="col">
+                <img src="{{event.location}}" alt="map" width="400" height="400">
+            </div>
+        </div>
     </div>
 
     {% block footer %}
