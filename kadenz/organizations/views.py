@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Organization
+from events.models import Event
 from django.contrib import messages
 from users.models import User
 
@@ -11,7 +12,8 @@ def all_organizations(request):
 
 def view_organization(request, organization_id):
     context = {
-    	"organization": Organization.objects.get(id=organization_id)
+    	"organization": Organization.objects.get(id=organization_id),
+        "all_events": Event.objects.filter(organization=organization_id),
     }
     return render(request, "organization.html", context)
 
@@ -34,8 +36,10 @@ def delete_organization(request, organization_id):
     organization.delete()
     return redirect("/organizations")
 
+
 def new_organization(request):
     return render(request, "new-organization.html")
+
 
 def new_organization_process(request):
     creator = User.objects.get(id=request.session["userid"])
@@ -52,6 +56,7 @@ def new_organization_process(request):
     else:
         organization.save()
         return redirect("/dashboard/")
+
 
 def edit_organization_process(request, organization_id):
     errors = Organization.objects.basic_validator(request.POST)

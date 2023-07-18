@@ -16,10 +16,76 @@
     {% endblock header %}
 
     <div class="container">
-        {{organization.id}}<br>
-        {{organization.name}}<br>
-        {{organization.details}}<br>
-        <a href="/events/new/{{organization.id}}/">Add an Event</a>
+
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h1 class="d-inline-block mb-2">{{organization.name}}</h1>
+                        <h5 class="mb-0">Information about this group:</h5>
+                        <p class="fs-4">{{organization.details}}</p>
+                        <h5 class="mb-0">Contact Email:</h5>
+                        <a href="mailto:{{organization.creator.email}}" class="fs-4">{{organization.creator.first_name}}
+                            {{organization.creator.last_name}}</a>
+
+                        {% if organization.creator.id == request.session.userid %}
+                        <hr class="my-4">
+                        <div class="py-2">
+                            <a href="/organizations/{{organization.id}}/edit/" class="mx-2 link-warning"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor"
+                                    class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                </svg></a>
+                            <a href="/organizations/{{organization.id}}/delete/" class="mx-2 link-danger"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor"
+                                    class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                </svg></a>
+                            <a href="/events/new/{{organization.id}}/" class="mx-2 link-success"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor"
+                                    class="bi bi-calendar-plus" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM8.5 8.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5a.5.5 0 0 1 1 0z" />
+                                </svg></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12em" height="12em" fill="currentColor"
+                            class="bi bi-people-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="container">
+
+            <h1 class="mb-3 text-center">Planned Events</h1>
+
+            <div class="row row-cols-1 row-cols-md-3 mb-3">
+
+                {% for event in all_events %}
+                <div class="col">
+                    {% block event-card %}
+                    {% include "event-card.html" %}
+                    {% endblock event-card %}
+                </div>
+                {% empty %}
+                <h3 class="text-warning">No events for this organization</h3>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
     </div>
 
     {% block footer %}
