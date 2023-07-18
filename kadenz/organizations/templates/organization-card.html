@@ -17,7 +17,7 @@
         <div class="card-body">
             <h4 class="card-title mb-4">{{organization.details}}</h4>
 
-            {% if organization.creator.id == userid %}
+            {% if organization.creator.id == request.session.userid %}
             <ul class="list-unstyled mt-3 mb-4">
                 <li><a href="/organizations/{{organization.id}}/edit/">Edit</a></li>
                 <li><a href="/organizations/{{organization.id}}/delete/">Delete</a></li>

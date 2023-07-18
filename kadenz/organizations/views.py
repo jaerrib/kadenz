@@ -5,8 +5,7 @@ from users.models import User
 
 def all_organizations(request):
     context = {
-    	"all_organizations": Organization.objects.all(),
-        "userid": request.session["userid"]
+    	"all_organizations": Organization.objects.all()
     }
     return render(request, "organization_list.html", context)
 
