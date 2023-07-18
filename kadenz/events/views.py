@@ -16,10 +16,15 @@ def all_events(request):
 
 def view_event(request, event_id):
     event = Event.objects.get(id=event_id)
+    status = False
+    if event.users.count() != 0:
+        for user in event.users.all():
+            if user.id == request.session["userid"]:
+                status = True
     context = {
     	"event": event,
+        "status": status
     }
-
     return render(request, "event.html", context)
 
 
