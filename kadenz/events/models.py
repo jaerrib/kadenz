@@ -20,6 +20,8 @@ class EventManager(models.Manager):
             errors["start_date"] = "Start date is required"
         if postData["end_date"] == "":
             errors["end_date"] = "End date is required"
+        if postData["end_date"] < postData["start_date"]:
+            errors["start_date"] = "Start date be the same as or come before end date"
         return errors
 
 class Event(models.Model):
