@@ -16,31 +16,56 @@
             <img src="{% static 'kadenz-logo.png' %}" width="360" height="120" role="img">
         </div>
         <hr>
-        <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
-            <h2>Login</h2>
 
-            <div>
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
 
-            <div class="mb-3">
-                <form action="login/process/" method="post">
-                    {% csrf_token %}
-                    <label for="email" class="form_label">Email:</label>
-                    <input type="text" name="email" class="form-control mb-3" id="email">
-                    <label for="password" class="form_label">Password:</label>
-                    <input type="password" name="password" class="form-control mb-3" id="password">
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </form>
+        <main>
+            <div class="container py-4">
+                <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+                    <div class="container-fluid py-5">
+                        <h1 class="display-5 fw-bold">What can Kadenz do for you?</h1>
+                        <p class="col-md-8 fs-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione aliquid quas fugiat asperiores magnam iste nam autem nesciunt, consequatur voluptate odio neque quibusdam, eum praesentium saepe, facere laboriosam libero culpa.</p>
+
+                            <a href="registration/" class="btn btn-primary btn-lg">Sign up your free account!</a>
+
+                    </div>
+                </div>
+
+                <div class="row align-items-md-stretch">
+                    <div class="col-md-6">
+                        {% load static %}
+                        <img src="{% static 'band01.jpg' %}" class="img-fluid rounded-3" role="img">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                            <h2>Login</h2>
+                            <div>
+                                {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>
+                                        {{ message }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <form action="login/process/" method="post">
+                                    {% csrf_token %}
+                                    <label for="email" class="form_label">Email:</label>
+                                    <input type="text" name="email" class="form-control mb-3" id="email">
+                                    <label for="password" class="form_label">Password:</label>
+                                    <input type="password" name="password" class="form-control mb-3" id="password">
+                                    <input type="submit" value="Submit" class="btn btn-primary">
+                                </form>
+                            </div>
+                            <p>No account? <a href="registration/">Sign up!</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>No account? <a href="registration/">Sign up!</a></p>
-        </div>
+        </main>
+
     </div>
 
     {% block footer %}
