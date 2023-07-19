@@ -8,6 +8,8 @@ from django.contrib import messages
 
 # Create your views here.
 def all_events(request):
+    if "userid" not in request.session:
+        return redirect("/")
     context = {
     	"all_events": Event.objects.all().order_by('-start_date') #sort start date first
     }
@@ -15,6 +17,8 @@ def all_events(request):
 
 
 def view_event(request, event_id):
+    if "userid" not in request.session:
+        return redirect("/")
     event = Event.objects.get(id=event_id)
     status = False
     if event.users.count() != 0:
@@ -29,6 +33,8 @@ def view_event(request, event_id):
 
 
 def edit_event(request, event_id):
+    if "userid" not in request.session:
+        return redirect("/")
     event = Event.objects.get(id=event_id)
     context = {
         "event": {
@@ -49,6 +55,8 @@ def edit_event(request, event_id):
 
 
 def new_event_process(request):
+    if "userid" not in request.session:
+        return redirect("/")
     errors = Event.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
@@ -78,6 +86,8 @@ def new_event_process(request):
 
 
 def edit_event_process(request):
+    if "userid" not in request.session:
+        return redirect("/")
     errors = Event.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
@@ -106,26 +116,32 @@ def edit_event_process(request):
 
 
 def delete_event(request, event_id):
+    if "userid" not in request.session:
+        return redirect("/")
     event = Event.objects.get(id=event_id)
     event.delete()
     return redirect("/dashboard/")
 
 
 def new_event(request, organization_id):
+    if "userid" not in request.session:
+        return redirect("/")
     organization = Organization.objects.get(id=organization_id)
     context = {"organization": organization}
     return render(request, "new-event.html", context)
 
 
 def rsvp(request, event_id):
-    # Add logic to make sure user is logged in here
+    if "userid" not in request.session:
+        return redirect("/")
     event = Event.objects.get(id=event_id)
     user = User.objects.get(id=request.session["userid"])
     event.users.add(user)
     return redirect(f"/events/{event.id}/")
 
 def rsvp_cancel(request, event_id):
-    # Add logic to make sure user is logged in here
+    if "userid" not in request.session:
+        return redirect("/")
     event = Event.objects.get(id=event_id)
     user = User.objects.get(id=request.session["userid"])
     event.users.remove(user)

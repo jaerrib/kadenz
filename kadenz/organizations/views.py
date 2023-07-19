@@ -5,12 +5,16 @@ from django.contrib import messages
 from users.models import User
 
 def all_organizations(request):
+    if "userid" not in request.session:
+        return redirect("/")
     context = {
     	"all_organizations": Organization.objects.all()
     }
     return render(request, "organization_list.html", context)
 
 def view_organization(request, organization_id):
+    if "userid" not in request.session:
+        return redirect("/")
     context = {
     	"organization": Organization.objects.get(id=organization_id),
         "all_events": Event.objects.filter(organization=organization_id),
@@ -18,6 +22,8 @@ def view_organization(request, organization_id):
     return render(request, "organization.html", context)
 
 def edit_organization(request, organization_id):
+    if "userid" not in request.session:
+        return redirect("/")
     organization = Organization.objects.get(id=organization_id)
     context = {
         "organization": {
@@ -32,16 +38,22 @@ def edit_organization(request, organization_id):
 
 
 def delete_organization(request, organization_id):
+    if "userid" not in request.session:
+        return redirect("/")
     organization = Organization.objects.get(id=organization_id)
     organization.delete()
     return redirect("/organizations")
 
 
 def new_organization(request):
+    if "userid" not in request.session:
+        return redirect("/")
     return render(request, "new-organization.html")
 
 
 def new_organization_process(request):
+    if "userid" not in request.session:
+        return redirect("/")
     creator = User.objects.get(id=request.session["userid"])
     organization = Organization(
         name=request.POST["name"],
@@ -59,6 +71,8 @@ def new_organization_process(request):
 
 
 def edit_organization_process(request, organization_id):
+    if "userid" not in request.session:
+        return redirect("/")
     errors = Organization.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
