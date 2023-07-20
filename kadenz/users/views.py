@@ -7,6 +7,8 @@ import bcrypt
 
 # Create your views here.
 def index(request):
+    if "userid" in request.session:
+        return redirect("/dashboard/")
     return render(request, "index.html")
 
 
