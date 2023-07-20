@@ -1,6 +1,7 @@
 from django.db import models
 import re
 
+
 # Create your models here.
 class UserManager(models.Manager):
     def basic_validator(self, postData):
@@ -13,7 +14,8 @@ class UserManager(models.Manager):
             errors['fields'] = "All fields required!"
         if postData['password'] != postData['confirm_password']:
             errors['password'] = "Passwords do not match!"
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        EMAIL_REGEX =\
+            re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Invalid email address!"
         user = User.objects.filter(email=postData['email'])
@@ -29,13 +31,16 @@ class UserManager(models.Manager):
                 is_blank = True
         if is_blank:
             errors["fields"] = "All fields required!"
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        EMAIL_REGEX =\
+            re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData["email"]):
             errors["email"] = "Invalid email address!"
         user = User.objects.filter(email=postData["email"])
         if not user:
-            errors["email"] = "User email does not exist - please sign up instead."
+            errors["email"] =\
+                "User email does not exist - please sign up instead."
         return errors
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=45)

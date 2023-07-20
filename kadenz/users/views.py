@@ -22,7 +22,8 @@ def login_process(request):
         user = User.objects.filter(email=request.POST['email'])
         if user:
             logged_user = user[0]
-            if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
+            if bcrypt.checkpw(request.POST['password'].encode(),
+                              logged_user.password.encode()):
                 request.session['userid'] = logged_user.id
                 return redirect('/dashboard/')
             else:
@@ -30,7 +31,6 @@ def login_process(request):
             for key, value in errors.items():
                 messages.error(request, value)
                 return redirect("/")
-
 
 
 def logout(request):

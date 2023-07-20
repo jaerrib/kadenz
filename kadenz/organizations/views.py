@@ -1,25 +1,28 @@
-from django.shortcuts import render, redirect, HttpResponse
 from .models import Organization
-from events.models import Event
 from django.contrib import messages
+from django.shortcuts import render, redirect
+from events.models import Event
 from users.models import User
+
 
 def all_organizations(request):
     if "userid" not in request.session:
         return redirect("/")
     context = {
-    	"all_organizations": Organization.objects.all()
+        "all_organizations": Organization.objects.all()
     }
     return render(request, "organization_list.html", context)
+
 
 def view_organization(request, organization_id):
     if "userid" not in request.session:
         return redirect("/")
     context = {
-    	"organization": Organization.objects.get(id=organization_id),
+        "organization": Organization.objects.get(id=organization_id),
         "all_events": Event.objects.filter(organization=organization_id),
     }
     return render(request, "organization.html", context)
+
 
 def edit_organization(request, organization_id):
     if "userid" not in request.session:
@@ -54,7 +57,6 @@ def new_organization(request):
 def new_organization_process(request):
     if "userid" not in request.session:
         return redirect("/")
-    creator = User.objects.get(id=request.session["userid"])
     organization = Organization(
         name=request.POST["name"],
         details=request.POST["details"],

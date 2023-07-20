@@ -1,9 +1,10 @@
-from django.shortcuts import render, HttpResponse, redirect
-import os, requests
 from .models import Event
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from organizations.models import Organization
 from users.models import User
-from django.contrib import messages
+import os
+import requests
 
 
 # Create your views here.
@@ -11,7 +12,7 @@ def all_events(request):
     if "userid" not in request.session:
         return redirect("/")
     context = {
-    	"all_events": Event.objects.all().order_by('-start_date') #sort start date first
+        "all_events": Event.objects.all().order_by('-start_date')
     }
     return render(request, "event_list.html", context)
 
@@ -26,7 +27,7 @@ def view_event(request, event_id):
             if user.id == request.session["userid"]:
                 status = True
     context = {
-    	"event": event,
+        "event": event,
         "status": status
     }
     return render(request, "event.html", context)
@@ -138,6 +139,7 @@ def rsvp(request, event_id):
     user = User.objects.get(id=request.session["userid"])
     event.users.add(user)
     return redirect(f"/events/{event.id}/")
+
 
 def rsvp_cancel(request, event_id):
     if "userid" not in request.session:

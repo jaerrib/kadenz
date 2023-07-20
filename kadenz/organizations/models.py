@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import User
 
+
 # Create your models here.
 class OrganizationManager(models.Manager):
     def basic_validator(self, postData):
@@ -10,6 +11,7 @@ class OrganizationManager(models.Manager):
         if len(postData["details"]) < 10:
             errors["details"] = "Details should be at least 10 characters"
         return errors
+
 
 class Organization(models.Model):
     creator = models.ForeignKey(User, related_name="organizations", on_delete=models.CASCADE)

@@ -2,6 +2,7 @@ from django.db import models
 from organizations.models import Organization
 from users.models import User
 
+
 # Create your models here.
 class EventManager(models.Manager):
     def basic_validator(self, postData):
@@ -9,7 +10,8 @@ class EventManager(models.Manager):
         if len(postData["name"]) < 5:
             errors["name"] = "Event name should be at least 5 characters"
         if len(postData["description"]) < 10:
-            errors["description"] = "Description should be at least 10 characters"
+            errors["description"] =\
+                "Description should be at least 10 characters"
         if postData["street"] == "":
             errors["street"] = "Street address is required"
         if postData["city"] == "":
@@ -21,11 +23,15 @@ class EventManager(models.Manager):
         if postData["end_date"] == "":
             errors["end_date"] = "End date is required"
         if postData["end_date"] < postData["start_date"]:
-            errors["start_date"] = "Start date be the same as or come before end date"
+            errors["start_date"] =\
+                "Start date be the same as or come before end date"
         return errors
 
+
 class Event(models.Model):
-    organization = models.ForeignKey(Organization, related_name="events", on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization,
+                                     related_name="events",
+                                     on_delete=models.CASCADE)
     name = models.CharField(max_length=45)
     description = models.TextField(null=True, blank=True)
     street = models.CharField(max_length=100, null=False, blank=True)
