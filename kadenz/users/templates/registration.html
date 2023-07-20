@@ -13,11 +13,11 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-center">
             {% load static %}
-            <a href="/"><img src="{% static 'kadenz-logo.png' %}" width="400" height="120" role="img"></a>
+            <a href="/"><img src="{% static 'kadenz-logo.png' %}" width="360" height="120" role="img"></a>
         </div>
         <hr>
-        <div class="col-4 mx-auto p-3 bg-body-secondary text-body card shadow">
-            <h2>Sign up for free</h2>
+        <div class="w-75 mx-auto p-3 bg-body-secondary text-body card shadow">
+            <h2 class="text-info">Register for your free account</h2>
 
             <div>
                 {% if messages %}
@@ -31,19 +31,19 @@
 
             <form action="process/" method="post">
                 {% csrf_token %}
-                <label for="first_name" class="form_label">First Name:</label>
+                <label for="first_name" class="form_label">*First Name:</label>
                 <input type="text" name="first_name" class="form-control mb-3" id="first_name">
-                <label for="last_name" class="form_label">Last Name:</label>
+                <label for="last_name" class="form_label">*Last Name:</label>
                 <input type="text" name="last_name" class="form-control mb-3" id="last_name">
-                <label for="email" class="form_label">Email:</label>
+                <label for="email" class="form_label">*Email:</label>
                 <input type="email" name="email" class="form-control mb-3" id="email">
-                <label for="password" class="form_label">Password:</label>
+                <label for="password" class="form_label">*Password:</label>
                 <input type="password" name="password" class="form-control mb-3" id="password">
-                <label for="confirm_password" class="form_label">Confirm Password:</label>
+                <label for="confirm_password" class="form_label">*Confirm Password:</label>
                 <input type="password" name="confirm_password" class="form-control mb-3" id="confirm_password">
-                <input type="submit" value="Sign up" class="btn btn-primary mb-3">
+                <input type="submit" value="Sign Up" class="btn btn-lg btn-primary mb-3">
             </form>
-            <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+            <small class="text-body-secondary fst-italic">*Required. By clicking Sign Up, you agree to our <a href="#">terms of use.</a></small>
         </div>
     </div>
 
