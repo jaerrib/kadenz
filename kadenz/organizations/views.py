@@ -45,7 +45,7 @@ def delete_organization(request, organization_id):
         return redirect("/")
     organization = Organization.objects.get(id=organization_id)
     organization.delete()
-    return redirect("/organizations")
+    return redirect("/dashboard/")
 
 
 def new_organization(request):
@@ -69,7 +69,7 @@ def new_organization_process(request):
             return redirect('/organizations/new')
     else:
         organization.save()
-        return redirect("/dashboard/")
+        return redirect(f"/organizations/{organization.id}/")
 
 
 def edit_organization_process(request, organization_id):
@@ -85,5 +85,5 @@ def edit_organization_process(request, organization_id):
         organization.name = request.POST["name"]
         organization.details = request.POST["details"]
         organization.save()
-        messages.success(request, "Organizations successfully updated")
-        return redirect(f"/{organization.id}/")
+        messages.success(request, "Organization successfully updated")
+        return redirect(f"/organizations/{organization.id}/")
