@@ -14,7 +14,7 @@ def all_events(request):
     context = {
         "all_events": Event.objects.all().order_by('start_date')
     }
-    return render(request, "event_list.html", context)
+    return render(request, "event-list.html", context)
 
 
 def all_events_reverse(request):
@@ -23,7 +23,7 @@ def all_events_reverse(request):
     context = {
         "all_events": Event.objects.all().order_by('-start_date')
     }
-    return render(request, "event_list.html", context)
+    return render(request, "event-list.html", context)
 
 
 def view_event(request, event_id):

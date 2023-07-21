@@ -11,7 +11,7 @@ def all_organizations(request):
     context = {
         "all_organizations": Organization.objects.all()
     }
-    return render(request, "organization_list.html", context)
+    return render(request, "organization-list.html", context)
 
 
 def view_organization(request, organization_id):
@@ -37,7 +37,7 @@ def edit_organization(request, organization_id):
             "updated_at": organization.updated_at,
         }
     }
-    return render(request, "edit.html", context)
+    return render(request, "edit-organization.html", context)
 
 
 def delete_organization(request, organization_id):
