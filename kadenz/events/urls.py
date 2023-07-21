@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.all_events),
+    path('reverse', views.all_events_reverse),
     path('<int:event_id>/', views.view_event),
     path('<int:event_id>/edit/', views.edit_event),
     path('edit/process/', views.edit_event_process),

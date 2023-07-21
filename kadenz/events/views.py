@@ -12,6 +12,15 @@ def all_events(request):
     if "userid" not in request.session:
         return redirect("/")
     context = {
+        "all_events": Event.objects.all().order_by('start_date')
+    }
+    return render(request, "event_list.html", context)
+
+
+def all_events_reverse(request):
+    if "userid" not in request.session:
+        return redirect("/")
+    context = {
         "all_events": Event.objects.all().order_by('-start_date')
     }
     return render(request, "event_list.html", context)
