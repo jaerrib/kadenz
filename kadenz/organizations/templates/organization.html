@@ -20,6 +20,7 @@
         <div class="row col-12 d-flex rounded border mb-4 shadow-sm">
             <div class="col-8">
                 <div class="col p-4 d-flex flex-column position-static">
+
                     <h1 class="d-inline-block mb-2">{{organization.name}}</h1>
                     <h5 class="mb-0">Information about this group:</h5>
                     <p class="fs-4">{{organization.details}}</p>
@@ -29,6 +30,17 @@
 
                     {% if organization.creator.id == request.session.userid %}
                     <hr class="my-4">
+
+                    <div>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }} text-success" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+
                     <div class="py-2">
                         <a href="/organizations/{{organization.id}}/edit/" class="mx-2 link-warning"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor"

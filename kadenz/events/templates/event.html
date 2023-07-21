@@ -17,16 +17,6 @@
 
     <div class="container border mb-4 rounded-3 shadow-sm p-3">
 
-        <div>
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
-
         <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 d-flex">
 
             <div class="col">
@@ -70,6 +60,17 @@
 
         {% if event.organization.creator.id == request.session.userid %}
         <hr class="my-4">
+
+        <div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }} text-success" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
         <div class="py-2">
             <a href="/events/{{event.id}}/edit/" class="mx-2 link-warning"><svg xmlns="http://www.w3.org/2000/svg"
                     width="2em" height="2em" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
