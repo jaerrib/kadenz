@@ -4,6 +4,10 @@
 
 Kadenz was developed using the Django framework as my final project with [Coding Dojo](https://www.codingdojo.com/). It was planned as a fundraising web app for school groups, such as marching band boosters. Stretch goals and other functionality will likely be added in the future.
 
+### Test Server
+
+A live version of this application is running on [Python Anywhere](https://jaerrib.pythonanywhere.com/)
+
 ## MVP target
 
 - [x] User login and registration
