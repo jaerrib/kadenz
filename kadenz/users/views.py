@@ -57,6 +57,7 @@ def registration_process(request):
             email=request.POST["email"],
             password=pw_hash)
         user.save()
+        request.session['userid'] = user.id
         return redirect("/dashboard/")
 
 
