@@ -1,12 +1,21 @@
 # Kadenz
 
+> This branch represents the original version of the application.
+> A [rewrite](https://github.com/jaerrib/kadenz/tree/rewrite) with
+> class-based views, improved project structure, and better UI/UX is currently
+> underway.
+
 ## Overview
 
-Kadenz was developed using the Django framework as my final project with [Coding Dojo](https://www.codingdojo.com/). It was planned as a fundraising web app for school groups, such as marching band boosters. Stretch goals and other functionality will likely be added in the future.
+Kadenz was developed using the Django framework as my final project
+with [Coding Dojo](https://www.codingdojo.com/). It was planned as a fundraising
+web app for school groups, such as marching band boosters. Stretch goals and
+other functionality will likely be added in the future.
 
 ### Test Server
 
-A live version of this application is running on [Python Anywhere](https://jaerrib.pythonanywhere.com/)
+A live version of this application is running
+on [Python Anywhere](https://jaerrib.pythonanywhere.com/)
 
 ## MVP target
 
@@ -20,7 +29,8 @@ A live version of this application is running on [Python Anywhere](https://jaerr
 - [ ] Uploading of images to group pages
 - [x] Usage of map API on event pages
 - [ ] CRUD functionality on sales, including:
-  - Adding items, such as candy bars, to a sale
-  - Allowing "guest" checkout
-  - Integration of payment API, such as Stripe or Paypal
-  - Association of purchase to specific student ID so that portions of the sale can go towards their "wallet"
+    - Adding items, such as candy bars, to a sale
+    - Allowing "guest" checkout
+    - Integration of payment API, such as Stripe or Paypal
+    - Association of purchase to specific student ID so that portions of the
+      sale can go towards their "wallet"
