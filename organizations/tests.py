@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.urls import reverse
 
 from .models import Organization
 
@@ -24,3 +25,27 @@ class OrganizationTests(TestCase):
         self.assertEqual(str(self.organization), "Test Organization")
         self.assertEqual(self.organization.get_absolute_url(),
                          "/organizations/1/")
+
+    def test_home_url_exists_at_desired_location(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_organization_list_url_exists_at_desired_location(self):
+        response = self.client.get("/organizations/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_organization_listview(self):
+        response = self.client.get(reverse("organization_list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.organization.name)
+        self.assertTemplateUsed(response, "organization_list.html")
+
+    def test_organization_detailview(self):
+        response = self.client.get(
+            reverse("organization_detail", kwargs={"pk": self.organization.id})
+        )
+        no_response = self.client.get("organization/100000")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(no_response.status_code, 404)
+        self.assertContains(response, self.organization.details)
+        self.assertTemplateUsed(response, "organization_detail.html")
