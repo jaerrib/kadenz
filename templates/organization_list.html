@@ -9,4 +9,8 @@
             <a href="{% url 'organization_detail' organization.pk %}">Details</a>
         </div>
     {% endfor %}
+    <p>
+        <a href="{% url 'organization_new' %}">New Organization</a> |
+        <a href="{% url 'home' %}">Home</a>
+    </p>
 {% endblock content %}

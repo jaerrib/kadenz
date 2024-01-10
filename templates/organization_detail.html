@@ -12,5 +12,10 @@
         </p>
         <p>Created at: {{ organization.created_at }}</p>
         <p>Last modified: {{ organization.updated_at }}</p>
+        <a href="{% url 'organization_edit' organization.pk %}">Edit</a> |
+        <a href="{% url 'organization_delete' organization.pk %}">Delete</a>
     </div>
+    <p>
+        <a href="{% url 'organization_list' %}">Back to list</a>
+    </p>
 {% endblock content %}
