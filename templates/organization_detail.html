@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Organization List{% endblock title %}
+
+{% block content %}
+    <div>
+        <h2>{{ organization.name }}</h2>
+        <h3>Details</h3>
+        <p>{{ organization.details }}</p>
+        <p>Contact: <a
+                href="mailto:{{ organization.creator.email }}">{{ organization.creator.username }}</a>
+        </p>
+        <p>Created at: {{ organization.created_at }}</p>
+        <p>Last modified: {{ organization.updated_at }}</p>
+    </div>
+{% endblock content %}

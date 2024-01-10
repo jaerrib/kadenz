@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Organization List{% endblock title %}
+
+{% block content %}
+    {% for organization in organization_list %}
+        <div>
+            <h2>{{ organization.name }}</h2>
+            <a href="{% url 'organization_detail' organization.pk %}">Details</a>
+        </div>
+    {% endfor %}
+{% endblock content %}
