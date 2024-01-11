@@ -32,7 +32,15 @@ class EventCreateView(CreateView):
 class EventUpdateView(UpdateView):
     model = Event
     template_name = "event_edit.html"
-    fields = ["name", "details"]
+    fields = [
+        "name",
+        "description",
+        "street",
+        "city",
+        "state",
+        "start_date",
+        "end_date",
+    ]
 
 
 class EventDeleteView(DeleteView):
