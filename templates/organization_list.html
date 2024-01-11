@@ -5,12 +5,26 @@
 {% block content %}
     {% for organization in organization_list %}
         <div>
-            <h2>{{ organization.name }}</h2>
-            <a href="{% url 'organization_detail' organization.pk %}">Details</a>
-        </div>
+
+            <div>
+                <h2>{{ organization.name }}</h2>
+                <a href="{% url 'organization_detail' organization.pk %}">Details</a>
+            </div>
+
+            <hr>
+            <h3>Events</h3>
+            {% for event in organization.event_set.all %}
+                <p>{{ event.name }}</p>
+                <p>{{ event.description }}</p>
+                <p>{{ event.street }}, {{ event.city }}, {{ event.state }}</p>
+                <p>{{ event.start_date }}</p>
+                <p>{{ event.end_date }}</p>
+                </div>
+            {% endfor %}
     {% endfor %}
     <p>
         <a href="{% url 'organization_new' %}">New Organization</a> |
         <a href="{% url 'home' %}">Home</a>
     </p>
+
 {% endblock content %}
