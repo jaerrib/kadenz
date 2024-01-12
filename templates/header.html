@@ -1,0 +1,68 @@
+
+
+{% block header %}
+
+    <header
+            class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            {% load static %}
+            <a href="/">
+
+                <img src="{% static 'img/kadenz-logo-no-tag.png' %}"
+                     width="180"
+                     height="60" role="img"
+                     alt="Kadenz logo without tagline">
+            </a>
+        </div>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center">
+            {% if user.is_authenticated %}
+                <li><a href="" class="nav-link px-2">Dashboard</a>
+                </li>
+                <li><a href="" class="nav-link px-2">Organizations</a>
+                </li>
+                <li><a href="" class="nav-link px-2">Events</a></li>
+                </ul>
+
+                <div class="dropdown text-end">
+                    <a href="#"
+                       class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32"
+                             height="32" fill="currentColor"
+                             class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd"
+                                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><span
+                                class="dropdown-item-text fw-bold">{{ user }}</span>
+                        </li>
+                        <li><a class="dropdown-item"
+                               href="">Change
+                            Password</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">Log
+                                    Out
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            {% else %}
+                </ul>
+                <div class="text-end">
+                    <a href="" class="btn btn-outline-primary">Log In</a>
+                    <a href="" class="btn btn-primary">Sign Up</a>
+                </div>
+            {% endif %}
+        </div>
+
+    </header>
+{% endblock header %}
