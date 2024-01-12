@@ -18,9 +18,11 @@
             {% if user.is_authenticated %}
                 <li><a href="" class="nav-link px-2">Dashboard</a>
                 </li>
-                <li><a href="" class="nav-link px-2">Organizations</a>
+                <li><a href="{% url 'organization_list' %}"
+                       class="nav-link px-2">Organizations</a>
                 </li>
-                <li><a href="" class="nav-link px-2">Events</a></li>
+                <li><a href="{% url 'event_list' %}" class="nav-link px-2">Events</a>
+                </li>
                 </ul>
 
                 <div class="dropdown text-end">
