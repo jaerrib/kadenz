@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Organization List{% endblock title %}
+{% block title %}Placeholder{% endblock title %}
 
 {% block content %}
+    <h1>DASHBOARD</h1>
     {% for organization in organization_list %}
         <div>
 
@@ -22,9 +23,5 @@
             {% endfor %}
         </div>
     {% endfor %}
-    <p>
-        <a href="{% url 'organization_new' %}">New Organization</a> |
-        <a href="{% url 'home' %}">Home</a>
-    </p>
 
-{% endblock content %}
+{% endblock %}

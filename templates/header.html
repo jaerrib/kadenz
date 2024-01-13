@@ -16,7 +16,7 @@
         </div>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center">
             {% if user.is_authenticated %}
-                <li><a href="" class="nav-link px-2">Dashboard</a>
+                <li><a href="{% url 'dashboard' %}" class="nav-link px-2">Dashboard</a>
                 </li>
                 <li><a href="{% url 'organization_list' %}"
                        class="nav-link px-2">Organizations</a>
@@ -42,13 +42,13 @@
                                 class="dropdown-item-text fw-bold">{{ user }}</span>
                         </li>
                         <li><a class="dropdown-item"
-                               href="">Change
+                               href="{% url 'password_change' %}">Change
                             Password</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <form method="post" action="">
+                            <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
                                 <button type="submit" class="dropdown-item">Log
                                     Out
@@ -60,8 +60,12 @@
             {% else %}
                 </ul>
                 <div class="text-end">
-                    <a href="" class="btn btn-outline-primary">Log In</a>
-                    <a href="" class="btn btn-primary">Sign Up</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary">
+                        Log In
+                    </a>
+                    <a href="{% url 'signup' %}" class="btn btn-primary">
+                        Sign Up
+                    </a>
                 </div>
             {% endif %}
         </div>

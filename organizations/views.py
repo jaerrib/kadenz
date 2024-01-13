@@ -35,3 +35,11 @@ class OrganizationDeleteView(DeleteView):
     model = Organization
     template_name = "organization_delete.html"
     success_url = reverse_lazy("organization_list")
+
+
+class DashboardView(ListView):
+    model = Organization
+    template_name = "dashboard.html"
+
+    def get_queryset(self):
+        return Organization.objects.filter(creator=self.request.user.pk)

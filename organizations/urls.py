@@ -7,6 +7,7 @@ from .views import (
     OrganizationCreateView,
     OrganizationUpdateView,
     OrganizationDeleteView,
+    DashboardView,
 )
 
 urlpatterns = [
@@ -32,5 +33,6 @@ urlpatterns = [
     ),
     path("organizations/", OrganizationListView.as_view(),
          name="organization_list"),
+    path("dashboard/", DashboardView.as_view(), name="dashboard"),
     path("", HomePageView.as_view(), name="home"),
 ]
