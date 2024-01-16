@@ -22,7 +22,11 @@ class OrganizationDetailView(DetailView):
 class OrganizationCreateView(CreateView):
     model = Organization
     template_name = "organization_new.html"
-    fields = ["name", "creator", "details"]
+    fields = ["name", "details"]
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 
 class OrganizationUpdateView(UpdateView):

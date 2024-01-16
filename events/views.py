@@ -20,6 +20,7 @@ class EventCreateView(CreateView):
     template_name = "event_new.html"
     fields = [
         "name",
+        "organization",
         "description",
         "street",
         "city",
@@ -27,6 +28,10 @@ class EventCreateView(CreateView):
         "start_date",
         "end_date",
     ]
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 
 class EventUpdateView(UpdateView):
