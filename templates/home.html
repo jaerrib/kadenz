@@ -1,6 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Homepage</h2>
-    <a href="{% url 'organization_list' %}">Org list</a>
+    {% load static %}
+    <div class="d-flex align-items-center justify-content-center">
+        <img src="{% static 'img/kadenz-logo.png' %}" width="360" height="120"
+             role="img" alt="Kadenz logo">
+    </div>
+    <hr>
+
+
+    <main>
+        <div class="d-flex mb-3">
+
+            <div class="col-auto col-lg-6 p-3 mb-3 mb-lg-0">
+                <h1>What can Kadenz do for you?</h1>
+                <p class="fs-4">Kadenz was born out of personal
+                    experience with high school marching band boosters and a
+                    desire to make it easy to manage your organization's
+                    fundraising events. We're starting out small. Right now,
+                    you can post events like car washes or can drives, but
+                    many exciting features, like online sales campaigns, are
+                    planned for the future.</p>
+                <p class="fst-italic">Sound interesting?</p>
+
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">Sign
+                    up your free account!</a>
+            </div>
+
+            <div class="col-auto col-lg-6 p-3">
+                {% load static %}
+                <img src="{% static 'img/band01.jpg' %}"
+                     class="img-fluid rounded-3" role="img"
+                     alt="photo of a marching band">
+            </div>
+        </div>
+        <p class="text-secondary ps-3">Disclaimer: Please note that Kadenz
+            is not an actual business. This site was created as my final project
+            with Coding Dojo in July 2023 and was subsequently rewritten in
+            January 2024. All functionality is present, but the organizations
+            and events are fictional. The source code can be viewed on
+            GitHub.</p>
+
+    </main>
+
 {% endblock content %}
