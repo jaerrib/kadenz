@@ -5,8 +5,7 @@
 {% block content %}
     <div class="d-flex justify-content-between align-middle">
 
-
-        <h1 class="mb-3 text-info">All Events</h1>
+        <h1 class="mb-3">All Events</h1>
         <div>
             <p>Sort by
 
@@ -36,7 +35,7 @@
         {% for event in event_list %}
             <div class="col">
                 {% block event-card %}
-                    {% include "event-card.html" %}
+                    {% include "event_card.html" %}
                 {% endblock event-card %}
             </div>
             {% empty %}
