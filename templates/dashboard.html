@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="mb-3 ">My Organizations</h1>
+        <h1 class="mb-3">My Organizations</h1>
         <table class="table">
             <thead>
             <tr>
@@ -56,7 +56,7 @@
                                 Delete</a>
                         </div>
                         <a href="/events/new/{{ organization.id }}/"
-                           class="btn btn-primary mx-auto my-2">
+                           class="btn btn-outline-primary mx-auto my-2">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="1.5em" height="1.5em"
@@ -80,7 +80,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'organization_new' %}" class="btn btn-lg btn-info">
+        <a href="{% url 'organization_new' %}" class="btn btn-lg btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg"
                  width="1em" height="1em" fill="currentColor"
                  class="bi bi-plus-circle mx-2"

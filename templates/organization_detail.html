@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <div class="row col-12 d-flex rounded border mt-4 mb-4 bg-body-tertiary shadow-sm">
+    <div class="row col-12 d-flex rounded border mt-3 bg-body-tertiary shadow-sm">
         <div class="col-8">
             <div class="col p-4 d-flex flex-column position-static">
 
@@ -63,14 +63,9 @@
         </div>
     </div>
 
-
-    <div class="container p-4">
-
+    <div class="mt-3">
         <h2 class="mb-3">Planned Events</h2>
-
-
         <div class="row row-cols-1 row-cols-md-3 mb-3">
-
             {% for event in organization.event_set.all %}
                 <div class="col">
                     {% block event-card %}
@@ -80,19 +75,7 @@
                 {% empty %}
                 <p class="fs-3 text-warning">No events for this organization</p>
             {% endfor %}
-
         </div>
-
-        {% for event in organization.event_set.all %}
-            <div>
-                <p>{{ event.name }}</p>
-                <p>{{ event.description }}</p>
-                <p>{{ event.street }}, {{ event.city }}, {{ event.state }}</p>
-                <p>{{ event.start_date }}</p>
-                <p>{{ event.end_date }}</p>
-            </div>
-        {% endfor %}
-
     </div>
 
 {% endblock content %}
