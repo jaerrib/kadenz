@@ -3,18 +3,19 @@
 {% block title %}Placeholder{% endblock title %}
 
 {% block content %}
-    <div class="container border mb-4 rounded-3 shadow-sm p-3">
+    <div class="container border mb-4 rounded bg-body-tertiary shadow-sm p-3">
 
         <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 d-flex">
 
             <div class="col">
                 <h1>{{ event.name }}</h1>
                 <h2>Benefits <a
-                        href="/organizations/{{ event.organization.id }}">{{ event.organization }}</a>
+                        href="{% url 'organization_detail' event.organization.pk %}">{{ event.organization }}</a>
                 </h2>
                 <hr>
-                <h4>{{ event.start_date }} - {{ event.end_date }}</h4>
-                <p>{{ event.street }}, {{ event.city }}, {{ event.state }}</p>
+                <h4>Date(s): {{ event.start_date }} - {{ event.end_date }}</h4>
+                <p>
+                    Location: {{ event.street }}, {{ event.city }}, {{ event.state }}</p>
                 <h4 class="mb-4">{{ event.description }}</h4>
                 <h5>Number of users attending: {{ event.users.count }} </h5>
                 {% if status %}
@@ -35,7 +36,8 @@
                        class="btn btn-success">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                              height="16" fill="currentColor"
-                             class="bi bi-bookmark-star" viewBox="0 0 16 16">
+                             class="bi bi-bookmark-star"
+                             viewBox="0 0 16 16">
                             <path
                                     d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
                             <path
@@ -44,19 +46,15 @@
                         Click to RSVP
                     </a>
                 {% endif %}
-
             </div>
-
             <div class="col py-4">
                 <img src="{{ event.location }}" alt="map" width="400"
                      height="400">
             </div>
         </div>
 
-
-        {% if organization.creator.pk == request.user.pk %}
+        {% if event.creator == request.user %}
             <hr class="my-4">
-
             <div class="py-2">
                 <a href="{% url 'event_edit' event.pk %}"
                    class="mx-2 btn btn-warning">
