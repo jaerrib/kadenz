@@ -17,8 +17,6 @@ class OrganizationAdmin(admin.ModelAdmin):
         "name",
         "creator",
         "details",
-        "created_at",
-        "updated_at",
     )
 
 
