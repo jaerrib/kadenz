@@ -3,28 +3,21 @@
 {% block title %}Organization List{% endblock title %}
 
 {% block content %}
-    {% for organization in organization_list %}
-        <div>
 
-            <div>
-                <h2>{{ organization.name }}</h2>
-                <a href="{% url 'organization_detail' organization.pk %}">Details</a>
+    <h1 class="mb-3">All Organizations</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-3 text-center">
+
+        {% for organization in organization_list %}
+            <div class="col">
+                {% block organization-card %}
+                    {% include "organization_card.html" %}
+                {% endblock organization-card %}
             </div>
+            {% empty %}
+            <h3>No organizations in list</h3>
+        {% endfor %}
 
-            <hr>
-            <h3>Events</h3>
-            {% for event in organization.event_set.all %}
-                <p>{{ event.name }}</p>
-                <p>{{ event.description }}</p>
-                <p>{{ event.street }}, {{ event.city }}, {{ event.state }}</p>
-                <p>{{ event.start_date }}</p>
-                <p>{{ event.end_date }}</p>
-            {% endfor %}
-        </div>
-    {% endfor %}
-    <p>
-        <a href="{% url 'organization_new' %}">New Organization</a> |
-        <a href="{% url 'home' %}">Home</a>
-    </p>
+    </div>
 
 {% endblock content %}
