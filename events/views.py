@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -5,17 +6,17 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Event
 
 
-class EventListView(ListView):
+class EventListView(LoginRequiredMixin, ListView):
     model = Event
     template_name = "event_list.html"
 
 
-class EventDetailView(DetailView):
+class EventDetailView(LoginRequiredMixin, DetailView):
     model = Event
     template_name = "event_detail.html"
 
 
-class EventCreateView(CreateView):
+class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
     template_name = "event_new.html"
     fields = [
@@ -34,7 +35,7 @@ class EventCreateView(CreateView):
         return super().form_valid(form)
 
 
-class EventUpdateView(UpdateView):
+class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Event
     template_name = "event_edit.html"
     fields = [
@@ -47,8 +48,16 @@ class EventUpdateView(UpdateView):
         "end_date",
     ]
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
 
-class EventDeleteView(DeleteView):
+
+class EventDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Event
     template_name = "event_delete.html"
     success_url = reverse_lazy("event_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
