@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from .forms import EventCreateForm, EventUpdateForm
 from .models import Event
 
 
@@ -26,6 +27,7 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 
 class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
+    form_template = EventCreateForm
     template_name = "event_new.html"
     fields = [
         "name",
@@ -38,6 +40,11 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         "end_date",
     ]
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = EventCreateForm()
+        return context
+
     def form_valid(self, form):
         form.instance.creator = self.request.user
         return super().form_valid(form)
@@ -45,6 +52,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
 
 class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Event
+    form_template = EventUpdateForm
     template_name = "event_edit.html"
     fields = [
         "name",
@@ -55,6 +63,11 @@ class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         "start_date",
         "end_date",
     ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = EventCreateForm()
+        return context
 
     def test_func(self):
         obj = self.get_object()
