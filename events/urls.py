@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import (
     EventListView,
+    EventListReverseView,
     EventDetailView,
     EventCreateView,
     EventUpdateView,
@@ -33,5 +34,10 @@ urlpatterns = [
         "",
         EventListView.as_view(),
         name="event_list",
+    ),
+    path(
+        "reverse/",
+        EventListReverseView.as_view(),
+        name="event_list_reverse",
     ),
 ]
