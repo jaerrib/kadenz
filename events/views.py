@@ -11,6 +11,14 @@ class EventListView(LoginRequiredMixin, ListView):
     template_name = "event_list.html"
 
 
+class EventListReverseView(LoginRequiredMixin, ListView):
+    model = Event
+    template_name = "event_list.html"
+
+    queryset = Event.objects.order_by("-pk")
+    context_object_name = "event_list"
+
+
 class EventDetailView(LoginRequiredMixin, DetailView):
     model = Event
     template_name = "event_detail.html"
