@@ -3,6 +3,7 @@ from django.urls import path
 from .views import (
     HomePageView,
     OrganizationListView,
+    OrganizationListReverseView,
     OrganizationDetailView,
     OrganizationCreateView,
     OrganizationUpdateView,
@@ -33,6 +34,11 @@ urlpatterns = [
     ),
     path("organizations/", OrganizationListView.as_view(),
          name="organization_list"),
+    path(
+        "reverse/",
+        OrganizationListReverseView.as_view(),
+        name="organization_list_reverse",
+    ),
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
     path("", HomePageView.as_view(), name="home"),
 ]

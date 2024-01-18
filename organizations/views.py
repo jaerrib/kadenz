@@ -14,6 +14,17 @@ class OrganizationListView(LoginRequiredMixin, ListView):
     model = Organization
     template_name = "organization_list.html"
 
+    queryset = Organization.objects.order_by("name")
+    context_object_name = "organization_list"
+
+
+class OrganizationListReverseView(LoginRequiredMixin, ListView):
+    model = Organization
+    template_name = "organization_list.html"
+
+    queryset = Organization.objects.order_by("-name")
+    context_object_name = "organization_list"
+
 
 class OrganizationDetailView(LoginRequiredMixin, DetailView):
     model = Organization
