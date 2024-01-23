@@ -55,7 +55,7 @@
                                 </svg>
                                 Delete</a>
                         </div>
-                        <a href="/events/new/{{ organization.id }}/"
+                        <a href="{% url 'event_new' organization.pk %}"
                            class="btn btn-outline-primary mx-auto my-2">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
