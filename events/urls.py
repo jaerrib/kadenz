@@ -11,7 +11,7 @@ from .views import (
 
 urlpatterns = [
     path(
-        "new/",
+        "new/<int:organization_pk>/",
         EventCreateView.as_view(),
         name="event_new",
     ),

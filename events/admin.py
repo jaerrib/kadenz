@@ -6,7 +6,7 @@ from .models import Event
 class EventAdmin(admin.ModelAdmin):
     list_display = (
         "organization",
-        "creator",
+        # "creator",
         "name",
         "description",
         "street",

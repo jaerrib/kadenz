@@ -7,10 +7,7 @@ from organizations.models import Organization
 class Event(models.Model):
     organization = models.ForeignKey(
         Organization,
-        on_delete=models.CASCADE,
-    )
-    creator = models.ForeignKey(
-        "auth.User",
+        related_name="events",
         on_delete=models.CASCADE,
     )
     name = models.CharField(max_length=45)
