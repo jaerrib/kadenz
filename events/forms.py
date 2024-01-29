@@ -14,6 +14,7 @@ class EventCreateForm(ModelForm):
         fields = [
             "name",
             "organization",
+            "creator",
             "description",
             "street",
             "city",
@@ -33,6 +34,7 @@ class EventUpdateForm(ModelForm):
         fields = [
             "name",
             "organization",
+            "creator",
             "description",
             "street",
             "city",

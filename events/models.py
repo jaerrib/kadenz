@@ -10,6 +10,10 @@ class Event(models.Model):
         related_name="events",
         on_delete=models.CASCADE,
     )
+    creator = models.ForeignKey(
+        "auth.User",
+        on_delete=models.CASCADE,
+    )
     name = models.CharField(max_length=45)
     description = models.TextField(null=True, blank=True)
     street = models.CharField(max_length=100, null=False, blank=True)

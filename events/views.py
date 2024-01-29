@@ -53,7 +53,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         form.instance.organization = Organization.objects.get(
             pk=self.kwargs["organization_pk"]
         )
-        # form.instance.creator = self.request.user
+        form.instance.creator = self.request.user
         return super().form_valid(form)
 
 
@@ -74,7 +74,6 @@ class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = EventUpdateForm()
-        print(context["form"])
         return context
 
     def test_func(self):
